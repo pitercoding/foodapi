@@ -1,4 +1,7 @@
 package com.example.foodapi.repository;
 
-public class FoodRepository {
+import com.example.foodapi.model.Food;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface FoodRepository extends JpaRepository<Food, Long> {
 }
