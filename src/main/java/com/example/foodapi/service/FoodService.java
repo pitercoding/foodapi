@@ -19,5 +19,16 @@ public class FoodService {
 
     public Food save(Food food) {return foodRepository.save(food);}
 
-    public void delete(Long id) {foodRepository.deleteById(id);}
+    public void deleteById(Long id) {foodRepository.deleteById(id);}
+
+    public Food updateById(Long id, Food food) {
+        return foodRepository.findById(id)
+                .map(existing -> {
+                    existing.setName(food.getName());
+                    existing.setExpirationDate(food.getExpirationDate());
+                    existing.setQuantity(food.getQuantity());
+                    return foodRepository.save(existing);
+                })
+                .orElseThrow(() -> new RuntimeException("Food not found with id " + id));
+    }
 }

@@ -16,9 +16,30 @@ public class FoodController {
         this.foodService = foodService;
     }
 
-    @GetMapping
-    public List<Food> getAll() {return foodService.getAll();}
+    // -------- CRUD -------- //
 
+    //CREATE
     @PostMapping
-    public Food create(@RequestBody Food food) {return foodService.save(food);}
+    public Food create(@RequestBody Food food) {
+        return foodService.save(food);
+    }
+
+    //READ
+    @GetMapping
+    public List<Food> getAll() {
+        return foodService.getAll();
+    }
+
+    //UPDATE
+    @PutMapping("/{id}")
+    public Food updateById(@PathVariable Long id, @RequestBody Food food) {
+        return foodService.updateById(id, food);
+    }
+
+    //DELETE
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id) {
+        foodService.deleteById(id);
+    }
+
 }
